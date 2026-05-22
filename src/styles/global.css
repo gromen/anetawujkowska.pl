@@ -140,12 +140,8 @@ nav.top .inner {
 .burger-line.l2 { top: 21px; }
 .burger-line.l3 { top: 27px; }
 
-/* burger -> X */
-body.menu-open .burger { background: var(--ink); border-color: var(--ink); }
-body.menu-open .burger-line { background: var(--bg); }
-body.menu-open .burger-line.l1 { top: 21px; transform: rotate(45deg); }
-body.menu-open .burger-line.l2 { opacity: 0; transform: scaleX(0); }
-body.menu-open .burger-line.l3 { top: 21px; transform: rotate(-45deg); }
+/* burger hidden while the menu overlay (with its own close button) is open */
+body.menu-open .burger { opacity: 0; pointer-events: none; }
 
 @media (max-width: 820px) {
   .burger { display: inline-block; }
@@ -244,6 +240,25 @@ body.menu-open .mobile-menu .mm-foot {
   text-transform: uppercase;
   color: rgba(255,255,255,0.5);
 }
+
+.mm-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.45);
+  color: var(--bg);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.mm-close:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.mm-close svg { width: 20px; height: 20px; }
 
 body.menu-open { overflow: hidden; }
 
@@ -914,6 +929,29 @@ footer .bottom {
   letter-spacing: 0.1em;
 }
 @media (max-width: 540px) { footer .bottom { flex-direction: column; gap: 8px; } }
+.footer-credit {
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.footer-credit a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.72);
+  transition: color .2s ease;
+}
+.footer-credit a:hover { color: var(--accent); }
+.footer-credit svg {
+  width: 13px;
+  height: 13px;
+  transition: transform .3s ease;
+}
+.footer-credit a:hover svg { transform: rotate(20deg); }
 
 /* sticky CTA */
 .sticky-call {

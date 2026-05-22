@@ -18,6 +18,11 @@ const { nav, contact } = site;
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mm-close" type="button" aria-label="Zamknij menu" data-mm>
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
   <ul class="mm-links">
     {nav.map((item, i) => (
       <li>
