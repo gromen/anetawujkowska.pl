@@ -1,0 +1,43 @@
+---
+---
+<div id="cookie-bar" class="cookie-bar hidden" role="dialog" aria-live="polite" aria-label="Zgoda na pliki cookie">
+  <p>
+    Używamy plików cookie do analityki (Google Analytics). Możesz zaakceptować lub odrzucić.
+    Szczegóły w <a href="/polityka-prywatnosci">polityce prywatności</a>.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" data-cookie="accept" class="btn primary">Akceptuję</button>
+    <button type="button" data-cookie="reject" class="btn ghost">Odrzuć</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const KEY = 'cookie-consent';
+    const bar = document.getElementById('cookie-bar');
+    if (!bar) return;
+
+    const existing = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+    if (!existing) bar.classList.remove('hidden');
+
+    function apply(choice) {
+      try { localStorage.setItem(KEY, choice); } catch {}
+      bar.classList.add('hidden');
+      if (typeof window.gtag === 'function') {
+        const granted = choice === 'accept';
+        window.gtag('consent', 'update', {
+          ad_storage: granted ? 'granted' : 'denied',
+          ad_user_data: granted ? 'granted' : 'denied',
+          ad_personalization: granted ? 'granted' : 'denied',
+          analytics_storage: granted ? 'granted' : 'denied',
+        });
+      }
+    }
+
+    if (existing === 'accept') apply('accept');
+
+    bar.querySelectorAll('[data-cookie]').forEach((btn) => {
+      btn.addEventListener('click', () => apply(btn.getAttribute('data-cookie')));
+    });
+  })();
+</script>

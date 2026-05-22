@@ -1,0 +1,6 @@
+---
+import { site } from '~/lib/site';
+---
+<a class="sticky-call" href={`tel:${site.contact.phone}`} aria-label={`Zadzwoń ${site.contact.phoneLabel}`}>
+  <span class="pulse"></span>{site.contact.phoneLabel}
+</a>

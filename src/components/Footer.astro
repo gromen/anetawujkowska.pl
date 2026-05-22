@@ -1,0 +1,50 @@
+---
+import { site } from '~/lib/site';
+const { contact, company, nav } = site;
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="container">
+    <div class="footer-display"><span class="alt">aneta</span><span class="acc">wujkowska</span><span class="acc">.</span><span class="alt">pl</span></div>
+    <div class="grid">
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href={`tel:${contact.phone}`}>{contact.phoneLabel}</a></li>
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+          <li>{contact.addressLine}</li>
+          <li>{contact.postalCity}</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Dane firmy</h5>
+        <ul>
+          <li>Pośrednictwo Finansowe<br />Aneta Wujkowska</li>
+          <li>NIP: {company.nip}</li>
+          <li>REGON: {company.regon}</li>
+          <li>{company.registeredAddress}</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="/">Strona główna</a></li>
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h5>Kredyty</h5>
+        <ul>
+          <li>Hipoteczne</li>
+          <li>Gotówkowe</li>
+          <li>Konsolidacyjne</li>
+          <li>Dla rolników</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>© {year} {company.legalName} · NIP {company.nip}</div>
+      <div><a href="/polityka-prywatnosci">Polityka prywatności</a> &nbsp;·&nbsp; <a href="/regulamin">Regulamin</a></div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,261 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import { site } from '~/lib/site';
+const { contact } = site;
+const tel = `tel:${contact.phone}`;
+---
+
+<Layout>
+  <header id="top" class="hero">
+    <div class="container">
+      <div class="label-row">
+        <span><span class="dot">●</span> &nbsp;Ekspert finansowy · Ostrów Mazowiecka</span>
+        <span>od 2010 · {contact.addressLine}</span>
+      </div>
+
+      <div class="grid">
+        <div>
+          <h1>
+            <span class="alt">Kredyty.</span><br />
+            <span>Po Twojej<span class="acc">.</span></span><br />
+            <span class="alt">stronie</span><br />
+            <span>stołu<span class="acc">.</span></span>
+          </h1>
+          <p class="sub">Ekspert finansowy z wieloletnim doświadczeniem w bankowości. Porównuję oferty wielu Banków, prowadzę za rękę przez dokumentację, jasno tłumaczę warunki umów. Bez opłat od Klienta.</p>
+          <div class="cta-row">
+            <a class="btn primary" href={tel}>Umów rozmowę <span class="arrow">→</span></a>
+            <a class="btn ghost" href="#o-mnie">Dowiedz się więcej</a>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="portrait tall photo hero-photo" role="img" aria-label="Aneta Wujkowska — ekspert finansowy"></div>
+          <div class="badge-stack">
+            <div class="badge"><span>Rozmowa</span><span class="v">0 zł od klienta</span></div>
+            <div class="badge"><span>Spotkanie</span><span class="v">stacjonarne / online</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat">
+          <div class="k">15<span class="acc">+</span></div>
+          <div class="l">lat doświadczenia w instytucjach finansowych</div>
+        </div>
+        <div class="stat">
+          <div class="k">9</div>
+          <div class="l">banków, z którymi współpracuję na co dzień</div>
+        </div>
+        <div class="stat">
+          <div class="k">100<span class="acc">%</span></div>
+          <div class="l">bezstronne podejście, zero opłat od klienta</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="o-mnie">
+    <div class="container">
+      <div class="sect-num">02 / O mnie</div>
+      <h2 class="title">Ekspert, który <span class="alt">najpierw</span> słucha<span class="acc">,</span><br />potem proponuje.</h2>
+
+      <div class="about-grid">
+        <div>
+          <div class="portrait square photo about-photo" role="img" aria-label="Aneta Wujkowska przy pracy"></div>
+          <div class="about-meta">
+            <div class="row"><span class="k">Imię i nazwisko</span><span class="v">Aneta Wujkowska</span></div>
+            <div class="row"><span class="k">Stanowisko</span><span class="v">Ekspert Finansowy</span></div>
+            <div class="row"><span class="k">Miejsce</span><span class="v">Ostrów Mazowiecka</span></div>
+            <div class="row"><span class="k">Doświadczenie</span><span class="v">15+ lat w bankowości</span></div>
+          </div>
+        </div>
+        <div class="body">
+          <p class="first">Jestem Ekspertem Finansowym z doświadczeniem w pracy w instytucjach finansowych. Wieloletnie doświadczenie w banku w połączeniu z dobrą <span class="acc">znajomością rynku</span> gwarantuje przepis na sukces w uzyskaniu kredytowania.</p>
+          <p>Pomogę Ci wybrać produkt dopasowany do Twoich obecnych potrzeb — bez naciskania, bez ukrytych opłat od Klienta. Z mojej strony dostajesz porównanie ofert wielu Banków, jasne wyjaśnienie warunków oraz pomoc na każdym etapie — od pierwszej rozmowy po podpisanie umowy.</p>
+          <p>Pracuję w Ostrowi Mazowieckiej, ale do większości spraw wystarczy rozmowa telefoniczna lub spotkanie online. Jeśli wolisz spotkanie w biurze przy ulicy 3 maja 49 — zapraszam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kredyty">
+    <div class="container">
+      <div class="sect-num">03 / Kredyty</div>
+      <h2 class="title">Cztery rodzaje<br /><span class="alt">kredytów dla Ciebie.</span></h2>
+      <p class="lede">Nie musisz sam zbierać i analizować ofert wielu Banków. Pomogę Ci w kompleksowym przygotowaniu dokumentacji, wyjaśnię wszystkie zagadnienia i wątpliwości oraz omówię z Tobą umowę kredytową.</p>
+
+      <div class="prod-grid">
+        <article class="prod">
+          <div class="tag">A / Hipoteczny</div>
+          <h4>Kredyt hipoteczny</h4>
+          <p>Na zakup mieszkania, domu lub działki, a także na budowę i remont. Porównanie ofert wielu banków, prowadzenie za rękę przez cały proces.</p>
+          <div class="foot">bez opłat od klienta</div>
+        </article>
+        <article class="prod">
+          <div class="tag">B / Gotówkowy</div>
+          <h4>Kredyt gotówkowy</h4>
+          <p>Na dowolny cel — remont, wesele, samochód, wakacje. Krótka analiza zdolności, oferty z kilku banków, wybór najkorzystniejszej.</p>
+          <div class="foot">nawet 300 000 zł</div>
+        </article>
+        <article class="prod">
+          <div class="tag">C / Konsolidacja</div>
+          <h4>Kredyt konsolidacyjny</h4>
+          <p>Łączymy wszystkie raty w jedną — często niższą i z dłuższym okresem spłaty. Porządek w domowych finansach i mniejszy stres.</p>
+          <div class="foot">nawet 300 000 zł</div>
+        </article>
+        <article class="prod">
+          <div class="tag">D / Dla rolników</div>
+          <h4>Kredyt dla rolników</h4>
+          <p>Specjalne oferty dla gospodarstw rolnych — kredyty obrotowe, inwestycyjne i preferencyjne. Dopasowane do specyfiki sezonu.</p>
+          <div class="foot">indywidualnie</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="proces" class="section-alt">
+    <div class="container">
+      <div class="sect-num">04 / Jak pracuję</div>
+      <h2 class="title">Cztery kroki<span class="acc">.</span><br /><span class="alt">Bez nerwów, bez papierologii.</span></h2>
+
+      <div class="process-list">
+        <div class="step">
+          <div class="n">Krok 01</div>
+          <h4>Rozmowa wstępna</h4>
+          <div class="step-desc">Krótka, niezobowiązująca. Mówisz, czego potrzebujesz — ja zadaję pytania i robię notatki. Zwykle 20–30 minut przez telefon lub online.</div>
+        </div>
+        <div class="step">
+          <div class="n">Krok 02</div>
+          <h4>Analiza i oferty</h4>
+          <div class="step-desc">Zbieram oferty wielu Banków, porównuję, odrzucam słabe propozycje. Zostają 2–3 oferty warte uwagi — przedstawiam je razem z plusami i minusami.</div>
+        </div>
+        <div class="step">
+          <div class="n">Krok 03</div>
+          <h4>Dokumentacja</h4>
+          <div class="step-desc">Pomagam skompletować wszystkie potrzebne dokumenty, pilnuję terminów i prowadzę za rękę przez wniosek. Eliminujemy błędy, które wydłużają proces.</div>
+        </div>
+        <div class="step">
+          <div class="n">Krok 04</div>
+          <h4>Umowa i decyzja</h4>
+          <div class="step-desc">Omawiam z Tobą umowę, tłumaczę zapisy, zwracam uwagę na to, co istotne. Decyzję podejmujesz Ty — w pełni świadomie, bez presji.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="zaufanie">
+    <div class="container">
+      <div class="sect-num">05 / Zaufanie</div>
+      <h2 class="title">Współpracuję<br />z <span class="acc">wiodącymi</span> bankami.</h2>
+      <p class="lede">Banki, w których składamy wnioski o kredyty hipoteczne, gotówkowe i konsolidacyjne. Pełna lista do podmiany na realne logotypy.</p>
+
+      <div class="trust-strip">
+        <div class="partner">logo · bank 01</div>
+        <div class="partner">logo · bank 02</div>
+        <div class="partner">logo · bank 03</div>
+        <div class="partner">logo · bank 04</div>
+        <div class="partner">logo · bank 05</div>
+        <div class="partner">logo · bank 06</div>
+        <div class="partner">logo · bank 07</div>
+        <div class="partner">logo · bank 08</div>
+        <div class="partner">logo · bank 09</div>
+        <div class="partner">logo · bank 10</div>
+        <div class="partner">logo · bank 11</div>
+        <div class="partner">+ więcej</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-alt">
+    <div class="container">
+      <div class="sect-num">06 / FAQ</div>
+      <h2 class="title">Najczęstsze<br /><span class="acc">pytania.</span></h2>
+
+      <div class="faq-wrap">
+        <div class="faq-help">
+          <h5>Nie znajdujesz odpowiedzi?</h5>
+          <p>Zadzwoń lub napisz — odpowiadam najszybciej, jak mogę. Pierwsza rozmowa jest niezobowiązująca i bezpłatna.</p>
+          <a class="btn ghost" href={tel}>Zadzwoń <span class="arrow">→</span></a>
+        </div>
+        <div class="faq-list">
+          <details open>
+            <summary>Czy pobierasz opłatę od Klienta?</summary>
+            <div class="a">Nie. Pomoc jest dla Klienta bezpłatna — moje wynagrodzenie pochodzi od Banku, z którego oferty ostatecznie korzystasz. Niezależnie od tego porównuję oferty wielu instytucji, więc moja propozycja zawsze opiera się na tym, co dla Ciebie najkorzystniejsze.</div>
+          </details>
+          <details>
+            <summary>Z jakimi bankami współpracujesz?</summary>
+            <div class="a">Z wieloma wiodącymi bankami obecnymi w Polsce, oferującymi kredyty hipoteczne, gotówkowe i konsolidacyjne. Pełną listę partnerów przedstawię na pierwszym spotkaniu — tak, byś wiedział, z jakich ofert wybieramy.</div>
+          </details>
+          <details>
+            <summary>Jak długo trwa cały proces kredytu hipotecznego?</summary>
+            <div class="a">Zależy od banku i kompletności dokumentów — zwykle od 3 do 6 tygodni od złożenia wniosku do uruchomienia. Pomogę Ci tak przygotować dokumentację, by skrócić ten czas i uniknąć błędów, które najczęściej go wydłużają.</div>
+          </details>
+          <details>
+            <summary>Czy muszę przyjeżdżać do biura w Ostrowi Mazowieckiej?</summary>
+            <div class="a">Nie musisz. Pierwszą rozmowę przeprowadzimy telefonicznie lub online. Większość dokumentów wymienimy mailowo lub przez bezpieczny system bankowy. Jeśli wolisz spotkać się osobiście — zapraszam do biura przy ul. 3 maja 49 lok b.</div>
+          </details>
+          <details>
+            <summary>Czy pomożesz mi też, jeśli mam negatywną historię w BIK?</summary>
+            <div class="a">Sprawdzimy, co realnie jest możliwe. Czasem rozwiązaniem jest konsolidacja, czasem wybór banku z bardziej liberalnym scoringiem, czasem odczekanie kilku miesięcy. Każdą sytuację oceniam indywidualnie — bez obiecywania niemożliwego.</div>
+          </details>
+          <details>
+            <summary>Co mam przygotować na pierwsze spotkanie?</summary>
+            <div class="a">Najlepiej dowód osobisty i ogólne informacje o dochodach. Reszta — w zależności od produktu — pojawi się w trakcie. Nie potrzebujesz na start kompletnej teczki dokumentów; ja powiem, czego konkretnie potrzebujemy.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wartosci">
+    <div class="container">
+      <div class="sect-num">07 / Wartości</div>
+      <h2 class="title">Trzy zasady,<br />na których stoi <span class="acc">moja praca.</span></h2>
+
+      <div class="values-grid">
+        <div class="value">
+          <div class="glyph" aria-hidden="true">P</div>
+          <h4>Profesjonalizm<span class="acc">.</span></h4>
+          <p>Wieloletnia praktyka w banku i ciągła aktualizacja wiedzy o produktach. Pracuję świadomie, w oparciu o liczby i Twoją sytuację.</p>
+        </div>
+        <div class="value">
+          <div class="glyph" aria-hidden="true">Z</div>
+          <h4>Zaangażowanie<span class="acc">.</span></h4>
+          <p>Nie znikam po podpisaniu umowy. Pilnuję terminów, jestem dostępna na pytania, reaguję na zmiany. Twoja sprawa jest moja, dopóki nie zostanie zamknięta.</p>
+        </div>
+        <div class="value">
+          <div class="glyph" aria-hidden="true">U</div>
+          <h4>Uczciwość<span class="acc">.</span></h4>
+          <p>Mówię, jak jest. Nie obiecuję cudów, nie ukrywam haczyków. Jeśli oferta jest słaba — powiem to wprost. Niezależność jest dla mnie ważniejsza niż prowizja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="section-alt">
+    <div class="container">
+      <div class="sect-num">08 / Kontakt</div>
+      <h2 class="title">Zapraszam do kontaktu<br />w <span class="acc">dowolny sposób.</span></h2>
+
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="big">Wystarczy jedna<br />rozmowa<span class="acc">,</span><br />żebyśmy wiedzieli,<br />co dalej.</div>
+          <div class="channel"><span class="k">Telefon</span><span class="v"><a href={tel}>{contact.phoneLabel}</a></span></div>
+          <div class="channel"><span class="k">E-mail</span><span class="v"><a href={`mailto:${contact.email}`}>{contact.email}</a></span></div>
+          <div class="channel"><span class="k">Biuro</span><span class="v">{contact.addressLine}<br />{contact.postalCity}</span></div>
+        </div>
+        <div class="contact-right">
+          <div class="label">Jak to wygląda</div>
+          <h3>Najlepiej zadzwoń — w 20 minut określimy, czy i jak mogę Ci pomóc.</h3>
+          <p>Jeśli pora niedogodna, napisz maila lub umów się przez SMS. Pierwsza rozmowa jest niezobowiązująca i bezpłatna.</p>
+          <a class="btn primary" href={tel}>Zadzwoń teraz <span class="arrow">→</span></a>
+
+          <div class="hours">
+            <div class="row"><span class="d">Pon — Pt</span><span class="h">09:00 — 17:00</span></div>
+            <div class="row"><span class="d">Sobota</span><span class="h">na umówione spotkanie</span></div>
+            <div class="row"><span class="d">Niedziela</span><span class="h">nieczynne</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

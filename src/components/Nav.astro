@@ -1,0 +1,57 @@
+---
+import { site } from '~/lib/site';
+const { nav, contact } = site;
+---
+<nav class="top">
+  <div class="container inner">
+    <a class="brand" href="/#top"><span class="b1">aneta</span><span class="b2">wujkowska</span><span class="b3">.</span><span class="b4">pl</span></a>
+    <div class="navlinks">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a class="cta" href={`tel:${contact.phone}`}>Zadzwoń · {contact.phoneLabel}</a>
+      <button class="burger" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="burger-line l1"></span>
+        <span class="burger-line l2"></span>
+        <span class="burger-line l3"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul class="mm-links">
+    {nav.map((item, i) => (
+      <li>
+        <a href={item.href} data-mm>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>{item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="mm-foot">
+    <div class="mm-meta">Zadzwoń</div>
+    <a class="mm-call" href={`tel:${contact.phone}`} data-mm>{contact.phoneLabel}</a>
+    <div class="mm-meta">{contact.addressLine} · Ostrów Mazowiecka</div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const burger = document.querySelector('.burger');
+    const menu = document.getElementById('mobile-menu');
+    if (!burger || !menu) return;
+    function setOpen(open) {
+      document.body.classList.toggle('menu-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+    burger.addEventListener('click', function () {
+      setOpen(!document.body.classList.contains('menu-open'));
+    });
+    menu.querySelectorAll('[data-mm]').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>

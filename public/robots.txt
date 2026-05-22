@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anetawujkowska.pl/sitemap-index.xml

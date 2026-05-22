@@ -1,0 +1,97 @@
+---
+import '~/styles/global.css';
+import Ribbon from '~/components/Ribbon.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import StickyCall from '~/components/StickyCall.astro';
+import CookieBar from '~/components/CookieBar.astro';
+import GA4 from '~/components/GA4.astro';
+import { site } from '~/lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = site.description, image = site.ogImage } = Astro.props;
+const pageTitle = title ?? 'Aneta Wujkowska — Ekspert Finansowy · Kredyty · Ostrów Mazowiecka';
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+const ogImage = new URL(image, site.url).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  name: site.company.legalName,
+  image: ogImage,
+  url: site.url,
+  telephone: site.contact.phone,
+  email: site.contact.email,
+  priceRange: 'Bezpłatnie dla klienta',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.contact.addressLine,
+    postalCode: '07-300',
+    addressLocality: 'Ostrów Mazowiecka',
+    addressRegion: 'mazowieckie',
+    addressCountry: 'PL',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="kredyt hipoteczny Ostrów Mazowiecka, kredyt gotówkowy, konsolidacja, kredyt dla rolników, pośrednik kredytowy, ekspert finansowy, Aneta Wujkowska" />
+    <meta name="author" content="Aneta Wujkowska" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f1b2d" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="anetawujkowska.pl" />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+    <link rel="preload" as="image" href="/assets/aneta-biurko.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <GA4 />
+  </head>
+  <body>
+    <Ribbon />
+    <Nav />
+    <main id="main"><slot /></main>
+    <Footer />
+    <StickyCall />
+    <CookieBar />
+  </body>
+</html>
