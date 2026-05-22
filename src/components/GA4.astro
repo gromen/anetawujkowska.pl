@@ -6,38 +6,50 @@ const enabled = import.meta.env.PROD && !!gtmId;
 ---
 
 {enabled && (
-  <>
-    <script is:inline>
-      (function () {
-        const host = location.hostname;
-        if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) {
-          window.__GTM_DISABLED__ = true;
-          return;
+  <script is:inline define:vars={{ gtmId }}>
+    (function () {
+      const host = location.hostname;
+      if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) {
+        window.__GTM_DISABLED__ = true;
+        return;
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+
+      // Consent denied by default — nothing is tracked until the visitor accepts.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      });
+
+      // GTM is injected ONLY after consent — never before.
+      var loaded = false;
+      window.__loadGTM = function () {
+        if (loaded || window.__GTM_DISABLED__) return;
+        loaded = true;
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtmId;
+        document.head.appendChild(s);
+      };
+
+      // Returning visitor who already accepted — restore consent and load.
+      try {
+        if (localStorage.getItem('cookie-consent') === 'accept') {
+          gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted',
+          });
+          window.__loadGTM();
         }
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        window.gtag = gtag;
-        gtag('consent', 'default', {
-          ad_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-          analytics_storage: 'denied',
-          wait_for_update: 500,
-        });
-      })();
-    </script>
-    <script is:inline define:vars={{ gtmId }}>
-      (function (w, d, s, l, i) {
-        if (w.__GTM_DISABLED__) return;
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', gtmId);
-    </script>
-  </>
+      } catch (e) {}
+    })();
+  </script>
 )}

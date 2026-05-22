@@ -2,8 +2,9 @@
 ---
 <div id="cookie-bar" class="cookie-bar hidden" role="dialog" aria-live="polite" aria-label="Zgoda na pliki cookie">
   <p>
-    Używamy plików cookie do analityki (Google Analytics). Możesz zaakceptować lub odrzucić.
-    Szczegóły w <a href="/polityka-prywatnosci">polityce prywatności</a>.
+    Używamy plików cookie do analityki (Google Analytics). Bez Twojej zgody
+    nie śledzimy ruchu na stronie. Szczegóły w
+    <a href="/polityka-prywatnosci">polityce prywatności</a>.
   </p>
   <div class="cookie-actions">
     <button type="button" data-cookie="accept" class="btn primary">Akceptuję</button>
@@ -17,27 +18,28 @@
     const bar = document.getElementById('cookie-bar');
     if (!bar) return;
 
-    const existing = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+    let existing = null;
+    try { existing = localStorage.getItem(KEY); } catch (e) {}
     if (!existing) bar.classList.remove('hidden');
 
-    function apply(choice) {
-      try { localStorage.setItem(KEY, choice); } catch {}
+    function choose(choice) {
+      try { localStorage.setItem(KEY, choice); } catch (e) {}
       bar.classList.add('hidden');
-      if (typeof window.gtag === 'function') {
-        const granted = choice === 'accept';
-        window.gtag('consent', 'update', {
-          ad_storage: granted ? 'granted' : 'denied',
-          ad_user_data: granted ? 'granted' : 'denied',
-          ad_personalization: granted ? 'granted' : 'denied',
-          analytics_storage: granted ? 'granted' : 'denied',
-        });
+      if (choice === 'accept') {
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted',
+          });
+        }
+        if (typeof window.__loadGTM === 'function') window.__loadGTM();
       }
     }
 
-    if (existing === 'accept') apply('accept');
-
     bar.querySelectorAll('[data-cookie]').forEach((btn) => {
-      btn.addEventListener('click', () => apply(btn.getAttribute('data-cookie')));
+      btn.addEventListener('click', () => choose(btn.getAttribute('data-cookie')));
     });
   })();
 </script>

@@ -1,6 +1,9 @@
 ---
 import Layout from "~/layouts/Layout.astro";
+import { Image } from "astro:assets";
 import { site } from "~/lib/site";
+import heroPhoto from "~/assets/aneta-biurko.jpg";
+import aboutPhoto from "~/assets/aneta-laptop.jpg";
 const { contact } = site;
 const tel = `tel:${contact.phone}`;
 ---
@@ -36,11 +39,17 @@ const tel = `tel:${contact.phone}`;
           </div>
         </div>
         <div class="hero-side">
-          <div
-            class="portrait tall photo hero-photo"
-            role="img"
-            aria-label="Aneta Wujkowska — ekspert finansowy"
-          >
+          <div class="portrait-frame tall">
+            <Image
+              src={heroPhoto}
+              alt="Aneta Wujkowska — ekspert finansowy"
+              class="portrait-img"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 880px) 100vw, 40vw"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div class="portrait-overlay"></div>
           </div>
           <div class="badge-stack">
             <div class="badge">
@@ -81,11 +90,15 @@ const tel = `tel:${contact.phone}`;
 
       <div class="about-grid">
         <div>
-          <div
-            class="portrait square photo about-photo"
-            role="img"
-            aria-label="Aneta Wujkowska przy pracy"
-          >
+          <div class="portrait-frame square">
+            <Image
+              src={aboutPhoto}
+              alt="Aneta Wujkowska przy pracy"
+              class="portrait-img"
+              widths={[400, 600, 802]}
+              sizes="(max-width: 880px) 100vw, 33vw"
+              loading="lazy"
+            />
           </div>
           <div class="about-meta">
             <div class="row">
