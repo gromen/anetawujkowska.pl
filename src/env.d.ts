@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_GTM_ID?: string;
+  readonly PUBLIC_SITE_URL?: string;
   readonly PROD: boolean;
   readonly DEV: boolean;
   readonly MODE: string;

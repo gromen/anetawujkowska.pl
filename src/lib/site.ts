@@ -2,12 +2,12 @@ export const site = {
   name: 'Aneta Wujkowska — Ekspert Finansowy',
   shortName: 'anetawujkowska.pl',
   domain: 'anetawujkowska.pl',
-  url: 'https://anetawujkowska.pl',
+  url: import.meta.env.PUBLIC_SITE_URL ?? 'https://anetawujkowska.pl',
   description:
     'Aneta Wujkowska — ekspert finansowy z Ostrowi Mazowieckiej. Kredyty hipoteczne, gotówkowe, konsolidacyjne i dla rolników. Porównanie ofert wielu banków, pomoc na każdym etapie, bez opłat od klienta.',
   locale: 'pl-PL',
   gtmId: import.meta.env.PUBLIC_GTM_ID ?? '',
-  ogImage: '/assets/aneta-biurko.jpg',
+  ogImage: '/assets/og-image.jpg',
   contact: {
     phone: '+48668551679',
     phoneLabel: '668 551 679',
