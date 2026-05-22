@@ -1,12 +1,12 @@
 ---
-import '~/styles/global.css';
-import Ribbon from '~/components/Ribbon.astro';
-import Nav from '~/components/Nav.astro';
-import Footer from '~/components/Footer.astro';
-import StickyCall from '~/components/StickyCall.astro';
-import CookieBar from '~/components/CookieBar.astro';
-import GA4 from '~/components/GA4.astro';
-import { site } from '~/lib/site';
+import CookieBar from "~/components/CookieBar.astro";
+import Footer from "~/components/Footer.astro";
+import GA4 from "~/components/GA4.astro";
+import Nav from "~/components/Nav.astro";
+import Ribbon from "~/components/Ribbon.astro";
+import StickyCall from "~/components/StickyCall.astro";
+import { site } from "~/lib/site";
+import "~/styles/global.css";
 
 interface Props {
   title?: string;
@@ -14,34 +14,39 @@ interface Props {
   image?: string;
 }
 
-const { title, description = site.description, image = site.ogImage } = Astro.props;
-const pageTitle = title ?? 'Aneta Wujkowska — Ekspert Finansowy · Ostrów Mazowiecka';
+const {
+  title,
+  description = site.description,
+  image = site.ogImage,
+} = Astro.props;
+const pageTitle =
+  title ?? "Aneta Wujkowska — Ekspert Finansowy · Ostrów Mazowiecka";
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogImage = new URL(image, site.url).toString();
 
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FinancialService',
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
   name: site.company.legalName,
   image: ogImage,
   url: site.url,
   telephone: site.contact.phone,
   email: site.contact.email,
-  priceRange: 'Bezpłatnie dla klienta',
+  priceRange: "Bezpłatnie dla klienta",
   address: {
-    '@type': 'PostalAddress',
+    "@type": "PostalAddress",
     streetAddress: site.contact.addressLine,
-    postalCode: '07-300',
-    addressLocality: 'Ostrów Mazowiecka',
-    addressRegion: 'mazowieckie',
-    addressCountry: 'PL',
+    postalCode: "07-300",
+    addressLocality: "Ostrów Mazowiecki",
+    addressRegion: "mazowieckie",
+    addressCountry: "PL",
   },
   openingHoursSpecification: [
     {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:00',
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:00",
     },
   ],
 };
@@ -54,7 +59,10 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="kredyt hipoteczny Ostrów Mazowiecka, kredyt gotówkowy, konsolidacja, kredyt dla rolników, pośrednik kredytowy, ekspert finansowy, Aneta Wujkowska" />
+    <meta
+      name="keywords"
+      content="kredyt hipoteczny Ostrów Mazowiecka, kredyt gotówkowy, konsolidacja, kredyt dla rolników, pośrednik kredytowy, ekspert finansowy, Aneta Wujkowska"
+    />
     <meta name="author" content="Aneta Wujkowska" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0f1b2d" />
@@ -72,15 +80,25 @@ const jsonLd = {
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Aneta Wujkowska — ekspert finansowy" />
+    <meta
+      property="og:image:alt"
+      content="Aneta Wujkowska — ekspert finansowy"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="Aneta Wujkowska — ekspert finansowy" />
+    <meta
+      name="twitter:image:alt"
+      content="Aneta Wujkowska — ekspert finansowy"
+    />
 
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(jsonLd)}
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
