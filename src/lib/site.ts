@@ -4,7 +4,7 @@ export const site = {
   domain: 'anetawujkowska.pl',
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://anetawujkowska.pl',
   description:
-    'Aneta Wujkowska — ekspert finansowy z Ostrowi Mazowieckiej. Kredyty hipoteczne, gotówkowe, konsolidacyjne i dla rolników. Porównanie ofert wielu banków, pomoc na każdym etapie, bez opłat od klienta.',
+    'Ekspert finansowy z Ostrowi Mazowieckiej. Kredyty hipoteczne, gotówkowe, konsolidacyjne i dla rolników — porównanie ofert wielu banków, bez opłat od klienta.',
   locale: 'pl-PL',
   gtmId: import.meta.env.PUBLIC_GTM_ID ?? '',
   ogImage: '/assets/og-image.jpg',

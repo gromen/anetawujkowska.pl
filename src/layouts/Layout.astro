@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { title, description = site.description, image = site.ogImage } = Astro.props;
-const pageTitle = title ?? 'Aneta Wujkowska — Ekspert Finansowy · Kredyty · Ostrów Mazowiecka';
+const pageTitle = title ?? 'Aneta Wujkowska — Ekspert Finansowy · Ostrów Mazowiecka';
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogImage = new URL(image, site.url).toString();
 
