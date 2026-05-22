@@ -803,6 +803,7 @@ h2.title .alt { font-weight: 300; color: var(--ink-soft); }
   font-weight: 500;
   font-size: 19px;
   color: var(--bg);
+  overflow-wrap: anywhere;
 }
 .contact-left .channel .v a:hover { color: var(--accent); }
 
@@ -848,6 +849,16 @@ h2.title .alt { font-weight: 300; color: var(--ink-soft); }
 }
 .contact-right .hours .row .d { color: var(--ink); font-weight: 500; }
 .contact-right .hours .row .h { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; }
+
+@media (max-width: 560px) {
+  .contact-left, .contact-right { padding: 36px 22px; }
+  .contact-left .channel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .contact-left .channel .v { font-size: 17px; }
+}
 
 /* FOOTER */
 footer {
