@@ -241,10 +241,12 @@ body.menu-open .mobile-menu .mm-foot {
   color: rgba(255,255,255,0.5);
 }
 
+.mm-close[aria-hidden="true"] { display: none; }
 .mm-close {
   position: fixed;
   top: 24px;
   right: 24px;
+  z-index: 110;
   width: 44px;
   height: 44px;
   display: inline-flex;
@@ -260,7 +262,7 @@ body.menu-open .mobile-menu .mm-foot {
 .mm-close:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .mm-close svg { width: 20px; height: 20px; }
 
-body.menu-open { overflow: hidden; }
+body.menu-open { overflow: hidden; position: fixed; width: 100%; }
 
 /* HERO */
 .hero {
@@ -869,13 +871,10 @@ footer {
 footer .footer-display {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(44px, 9vw, 140px);
+  font-size: clamp(28px, 9vw, 140px);
   line-height: 0.95;
   letter-spacing: -0.045em;
   margin: 0 0 56px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 footer .footer-display .acc { color: var(--accent); }
 footer .footer-display .alt { color: rgba(255,255,255,0.95); font-weight: 800; }
