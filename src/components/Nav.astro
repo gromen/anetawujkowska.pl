@@ -49,7 +49,15 @@ const { nav, contact } = site;
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       menu.setAttribute('aria-hidden', open ? 'false' : 'true');
     }
+    const closeBtn = menu.querySelector('.mm-close');
+    function syncClosePos() {
+      if (!closeBtn) return;
+      const r = burger.getBoundingClientRect();
+      closeBtn.style.top = r.top + 'px';
+      closeBtn.style.right = (window.innerWidth - r.right) + 'px';
+    }
     burger.addEventListener('click', function () {
+      syncClosePos();
       setOpen(!document.body.classList.contains('menu-open'));
     });
     menu.querySelectorAll('[data-mm]').forEach(function (a) {
