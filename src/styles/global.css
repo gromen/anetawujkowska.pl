@@ -320,9 +320,23 @@ body.menu-open { overflow: hidden; position: fixed; width: 100%; }
 }
 .hero .cta-row {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+
+  & .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+
+    & .btn {
+      width: auto;
+    }
+  }
 }
 .btn {
   display: inline-flex;
