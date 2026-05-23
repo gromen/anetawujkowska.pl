@@ -1,9 +1,9 @@
 ---
-import Layout from "~/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { site } from "~/lib/site";
 import heroPhoto from "~/assets/aneta-biurko.jpg";
 import aboutPhoto from "~/assets/aneta-laptop.jpg";
+import Layout from "~/layouts/Layout.astro";
+import { site } from "~/lib/site";
 const { contact } = site;
 const tel = `tel:${contact.phone}`;
 ---
@@ -292,29 +292,35 @@ const tel = `tel:${contact.phone}`;
           <details open>
             <summary>Czy pobierasz opłatę od Klienta?</summary>
             <div class="a">
-              Nie. Pomoc jest dla Klienta bezpłatna — moje wynagrodzenie
-              pochodzi od Banku, z którego oferty ostatecznie korzystasz.
-              Niezależnie od tego porównuję oferty wielu instytucji, więc moja
-              propozycja zawsze opiera się na tym, co dla Ciebie
-              najkorzystniejsze.
+              <div class="a-inner">
+                Nie. Pomoc jest dla Klienta bezpłatna — moje wynagrodzenie
+                pochodzi od Banku, z którego oferty ostatecznie korzystasz.
+                Niezależnie od tego porównuję oferty wielu instytucji, więc moja
+                propozycja zawsze opiera się na tym, co dla Ciebie
+                najkorzystniejsze.
+              </div>
             </div>
           </details>
           <details>
             <summary>Z jakimi bankami współpracujesz?</summary>
             <div class="a">
-              Z wieloma wiodącymi bankami obecnymi w Polsce, oferującymi kredyty
-              hipoteczne, gotówkowe i konsolidacyjne. Pełną listę partnerów
-              przedstawię na pierwszym spotkaniu — tak, byś wiedział, z jakich
-              ofert wybieramy.
+              <div class="a-inner">
+                Z wieloma wiodącymi bankami obecnymi w Polsce, oferującymi
+                kredyty hipoteczne, gotówkowe i konsolidacyjne. Pełną listę
+                partnerów przedstawię na pierwszym spotkaniu — tak, byś
+                wiedział, z jakich ofert wybieramy.
+              </div>
             </div>
           </details>
           <details>
             <summary>Jak długo trwa cały proces kredytu hipotecznego?</summary>
             <div class="a">
-              Zależy od banku i kompletności dokumentów — zwykle od 3 do 6
-              tygodni od złożenia wniosku do uruchomienia. Pomogę Ci tak
-              przygotować dokumentację, by skrócić ten czas i uniknąć błędów,
-              które najczęściej go wydłużają.
+              <div class="a-inner">
+                Zależy od banku i kompletności dokumentów — zwykle od 3 do 6
+                tygodni od złożenia wniosku do uruchomienia. Pomogę Ci tak
+                przygotować dokumentację, by skrócić ten czas i uniknąć błędów,
+                które najczęściej go wydłużają.
+              </div>
             </div>
           </details>
           <details>
@@ -322,10 +328,12 @@ const tel = `tel:${contact.phone}`;
               >Czy muszę przyjeżdżać do biura w Ostrowi Mazowieckiej?</summary
             >
             <div class="a">
-              Nie musisz. Pierwszą rozmowę przeprowadzimy telefonicznie lub
-              online. Większość dokumentów wymienimy mailowo lub przez
-              bezpieczny system bankowy. Jeśli wolisz spotkać się osobiście —
-              zapraszam do biura przy ul. 3 maja 49 lok b.
+              <div class="a-inner">
+                Nie musisz. Pierwszą rozmowę przeprowadzimy telefonicznie lub
+                online. Większość dokumentów wymienimy mailowo lub przez
+                bezpieczny system bankowy. Jeśli wolisz spotkać się osobiście —
+                zapraszam do biura przy ul. 3 maja 49 lok b.
+              </div>
             </div>
           </details>
           <details>
@@ -333,19 +341,23 @@ const tel = `tel:${contact.phone}`;
               >Czy pomożesz mi też, jeśli mam negatywną historię w BIK?</summary
             >
             <div class="a">
-              Sprawdzimy, co realnie jest możliwe. Czasem rozwiązaniem jest
-              konsolidacja, czasem wybór banku z bardziej liberalnym scoringiem,
-              czasem odczekanie kilku miesięcy. Każdą sytuację oceniam
-              indywidualnie — bez obiecywania niemożliwego.
+              <div class="a-inner">
+                Sprawdzimy, co realnie jest możliwe. Czasem rozwiązaniem jest
+                konsolidacja, czasem wybór banku z bardziej liberalnym
+                scoringiem, czasem odczekanie kilku miesięcy. Każdą sytuację
+                oceniam indywidualnie — bez obiecywania niemożliwego.
+              </div>
             </div>
           </details>
           <details>
             <summary>Co mam przygotować na pierwsze spotkanie?</summary>
             <div class="a">
-              Najlepiej dowód osobisty i ogólne informacje o dochodach. Reszta —
-              w zależności od produktu — pojawi się w trakcie. Nie potrzebujesz
-              na start kompletnej teczki dokumentów; ja powiem, czego konkretnie
-              potrzebujemy.
+              <div class="a-inner">
+                Najlepiej dowód osobisty i ogólne informacje o dochodach. Reszta
+                — w zależności od produktu — pojawi się w trakcie. Nie
+                potrzebujesz na start kompletnej teczki dokumentów; ja powiem,
+                czego konkretnie potrzebujemy.
+              </div>
             </div>
           </details>
         </div>
@@ -452,3 +464,39 @@ const tel = `tel:${contact.phone}`;
     </div>
   </section>
 </Layout>
+
+<script>
+  const items =
+    document.querySelectorAll<HTMLDetailsElement>(".faq-list details");
+
+  function closeItem(detail: HTMLDetailsElement) {
+    const body = detail.querySelector<HTMLElement>(".a");
+    if (!body) return;
+    detail.classList.add("is-closing");
+    function onEnd(e: TransitionEvent) {
+      if (e.propertyName !== "grid-template-rows") return;
+      body!.removeEventListener("transitionend", onEnd);
+      detail.removeAttribute("open");
+      detail.classList.remove("is-closing");
+    }
+    body.addEventListener("transitionend", onEnd);
+  }
+
+  function openItem(detail: HTMLDetailsElement) {
+    detail.setAttribute("open", "");
+  }
+
+  items.forEach((detail) => {
+    detail.querySelector("summary")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (detail.open && !detail.classList.contains("is-closing")) {
+        closeItem(detail);
+      } else if (!detail.open) {
+        items.forEach((other) => {
+          if (other !== detail && other.open) closeItem(other);
+        });
+        openItem(detail);
+      }
+    });
+  });
+</script>
