@@ -22,7 +22,7 @@ const {
 const pageTitle =
   title ?? "Aneta Wujkowska — Ekspert Finansowy · Ostrów Mazowiecka";
 const canonical = new URL(Astro.url.pathname, site.url).toString();
-const ogImage = new URL(image, site.url).toString();
+const ogImage = new URL(image, Astro.url.origin).toString();
 
 const jsonLd = {
   "@context": "https://schema.org",
