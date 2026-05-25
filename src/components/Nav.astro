@@ -1,14 +1,27 @@
 ---
-import { site } from '~/lib/site';
+import { site } from "~/lib/site";
 const { nav, contact } = site;
 ---
+
 <nav class="top">
   <div class="container inner">
-    <a class="brand" href="/#top"><span class="b1">aneta</span><span class="b2">wujkowska</span><span class="b3">.</span><span class="b4">pl</span></a>
+    <a class="brand" href="/#top"
+      ><span class="b1">aneta</span><span class="b2">wujkowska</span><span
+        class="b3">.</span
+      ><span class="b1">pl</span></a
+    >
     <div class="navlinks">
       {nav.map((item) => <a href={item.href}>{item.label}</a>)}
-      <a class="cta" href={`tel:${contact.phone}`}>Zadzwoń · {contact.phoneLabel}</a>
-      <button class="burger" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mobile-menu">
+      <a class="cta" href={`tel:${contact.phone}`}
+        >Zadzwoń · {contact.phoneLabel}</a
+      >
+      <button
+        class="burger"
+        type="button"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
         <span class="burger-line l1"></span>
         <span class="burger-line l2"></span>
         <span class="burger-line l3"></span>
@@ -19,71 +32,97 @@ const { nav, contact } = site;
 
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
   <ul class="mm-links">
-    {nav.map((item, i) => (
-      <li>
-        <a href={item.href} data-mm>
-          <span class="num">{String(i + 1).padStart(2, '0')}</span>{item.label}
-        </a>
-      </li>
-    ))}
+    {
+      nav.map((item, i) => (
+        <li>
+          <a href={item.href} data-mm>
+            <span class="num">{String(i + 1).padStart(2, "0")}</span>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
   </ul>
   <div class="mm-foot">
     <div class="mm-meta">Zadzwoń</div>
-    <a class="mm-call" href={`tel:${contact.phone}`} data-mm>{contact.phoneLabel}</a>
+    <a class="mm-call" href={`tel:${contact.phone}`} data-mm
+      >{contact.phoneLabel}</a
+    >
     <div class="mm-meta">{contact.addressLine} · Ostrów Mazowiecka</div>
   </div>
 </div>
 
-<button class="mm-close" type="button" aria-label="Zamknij menu" aria-hidden="true">
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-    <path d="M6 6l12 12M18 6L6 18" />
+<button
+  class="mm-close"
+  type="button"
+  aria-label="Zamknij menu"
+  aria-hidden="true"
+>
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+  >
+    <path d="M6 6l12 12M18 6L6 18"></path>
   </svg>
 </button>
 
 <script is:inline>
-  (function() {
-    const nav = document.querySelector('nav.top');
+  (function () {
+    const nav = document.querySelector("nav.top");
     if (!nav) return;
     let lastY = 0;
     let ticking = false;
 
-    window.__updateNavLastY = function(y) { lastY = y; };
+    window.__updateNavLastY = function (y) {
+      lastY = y;
+    };
 
-    window.addEventListener('scroll', function() {
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          const y = window.scrollY;
-          if (y < 80) {
-            nav.classList.remove('nav-hidden');
-          } else if (y > lastY) {
-            nav.classList.add('nav-hidden');
-          } else {
-            nav.classList.remove('nav-hidden');
-          }
-          lastY = y;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          requestAnimationFrame(function () {
+            const y = window.scrollY;
+            if (y < 80) {
+              nav.classList.remove("nav-hidden");
+            } else if (y > lastY) {
+              nav.classList.add("nav-hidden");
+            } else {
+              nav.classList.remove("nav-hidden");
+            }
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
 
     /* scroll spy */
-    var sectionIds = ['o-mnie', 'kredyty', 'proces', 'kontakt'];
+    var sectionIds = ["o-mnie", "kredyty", "proces", "kontakt"];
     var linkMap = {};
-    sectionIds.forEach(function(id) {
+    sectionIds.forEach(function (id) {
       var link = document.querySelector('.navlinks a[href="/#' + id + '"]');
       if (link) linkMap[id] = link;
     });
 
-    if ('IntersectionObserver' in window) {
-      var spy = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          var link = linkMap[entry.target.id];
-          if (link) link.classList.toggle('active', entry.isIntersecting);
-        });
-      }, { rootMargin: '-80px 0px -50% 0px' });
+    if ("IntersectionObserver" in window) {
+      var spy = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var link = linkMap[entry.target.id];
+            if (link) link.classList.toggle("active", entry.isIntersecting);
+          });
+        },
+        { rootMargin: "-80px 0px -50% 0px" },
+      );
 
-      sectionIds.forEach(function(id) {
+      sectionIds.forEach(function (id) {
         var el = document.getElementById(id);
         if (el) spy.observe(el);
       });
@@ -93,44 +132,50 @@ const { nav, contact } = site;
 
 <script is:inline>
   (function () {
-    const burger = document.querySelector('.burger');
-    const menu = document.getElementById('mobile-menu');
+    const burger = document.querySelector(".burger");
+    const menu = document.getElementById("mobile-menu");
     if (!burger || !menu) return;
-    const closeBtn = document.querySelector('.mm-close');
+    const closeBtn = document.querySelector(".mm-close");
     var scrollY = 0;
     function setOpen(open) {
       if (open) {
         scrollY = window.scrollY;
-        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.top = "-" + scrollY + "px";
       } else {
-        document.body.style.top = '';
+        document.body.style.top = "";
         window.scrollTo(0, scrollY);
         if (window.__updateNavLastY) window.__updateNavLastY(scrollY);
       }
-      document.body.classList.toggle('menu-open', open);
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
-      if (closeBtn) closeBtn.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
+      if (closeBtn)
+        closeBtn.setAttribute("aria-hidden", open ? "false" : "true");
     }
     function syncClosePos() {
       if (!closeBtn) return;
       const r = burger.getBoundingClientRect();
-      closeBtn.style.top = r.top + 'px';
-      closeBtn.style.right = (window.innerWidth - r.right) + 'px';
+      closeBtn.style.top = r.top + "px";
+      closeBtn.style.right = window.innerWidth - r.right + "px";
     }
-    burger.addEventListener('click', function () {
+    burger.addEventListener("click", function () {
       syncClosePos();
-      setOpen(!document.body.classList.contains('menu-open'));
+      setOpen(!document.body.classList.contains("menu-open"));
     });
-    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
-    menu.querySelectorAll('[data-mm]').forEach(function (a) {
-      a.addEventListener('click', function () { setOpen(false); });
+    if (closeBtn)
+      closeBtn.addEventListener("click", function () {
+        setOpen(false);
+      });
+    menu.querySelectorAll("[data-mm]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        setOpen(false);
+      });
     });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setOpen(false);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
     });
-    window.addEventListener('resize', function () {
-      if (document.body.classList.contains('menu-open')) syncClosePos();
+    window.addEventListener("resize", function () {
+      if (document.body.classList.contains("menu-open")) syncClosePos();
     });
   })();
 </script>
