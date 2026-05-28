@@ -6,7 +6,7 @@ export const site = {
   description:
     'Ekspert finansowy z Ostrowi Mazowieckiej. Kredyty hipoteczne, gotówkowe, konsolidacyjne i dla rolników — porównanie ofert wielu banków, bez opłat od klienta.',
   locale: 'pl-PL',
-  ga4Id: 'G-JMQBSBX98T',
+  ga4Id: import.meta.env.PUBLIC_GA4_ID ?? '',
   ogImage: '/assets/og-image.jpg',
   contact: {
     phone: '+48668551679',
