@@ -1,24 +1,23 @@
 ---
 import { site } from '~/lib/site';
 
-const gtmId = site.gtmId;
-const enabled = import.meta.env.PROD && !!gtmId;
+const ga4Id = site.ga4Id;
+const enabled = import.meta.env.PROD && !!ga4Id;
 ---
 
 {enabled && (
-  <script is:inline define:vars={{ gtmId }}>
+  <script is:inline define:vars={{ ga4Id }}>
     (function () {
       const host = location.hostname;
-      if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) {
-        window.__GTM_DISABLED__ = true;
-        return;
-      }
+      if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) return;
 
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       window.gtag = gtag;
 
-      // Consent denied by default — nothing is tracked until the visitor accepts.
+      gtag('js', new Date());
+
+      // Consent denied by default — nothing tracked until visitor accepts.
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -26,28 +25,31 @@ const enabled = import.meta.env.PROD && !!gtmId;
         analytics_storage: 'denied',
       });
 
-      // GTM is injected ONLY after consent — never before.
-      var loaded = false;
-      window.__loadGTM = function () {
-        if (loaded || window.__GTM_DISABLED__) return;
-        loaded = true;
-        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      gtag('config', ga4Id, { send_page_view: false });
+
+      window.__loadGA4 = function () {
+        if (window.__GA4_LOADED__) return;
+        window.__GA4_LOADED__ = true;
+
         var s = document.createElement('script');
         s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtmId;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
         document.head.appendChild(s);
+
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+          analytics_storage: 'granted',
+        });
+
+        gtag('event', 'page_view');
       };
 
-      // Returning visitor who already accepted — restore consent and load.
+      // Returning visitor who already accepted — load immediately.
       try {
         if (localStorage.getItem('cookie-consent') === 'accept') {
-          gtag('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted',
-          });
-          window.__loadGTM();
+          window.__loadGA4();
         }
       } catch (e) {}
     })();
