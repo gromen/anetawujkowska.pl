@@ -6,52 +6,45 @@ const enabled = import.meta.env.PROD && !!ga4Id;
 ---
 
 {enabled && (
-  <script is:inline define:vars={{ ga4Id }}>
-    (function () {
-      const host = location.hostname;
-      if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local')) return;
-
+  <>
+    {/* Consent defaults must run before gtag.js loads */}
+    <script is:inline define:vars={{ ga4Id }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       window.gtag = gtag;
 
-      gtag('js', new Date());
-
-      // Consent denied by default — nothing tracked until visitor accepts.
+      // Consent denied by default — no data sent until visitor accepts.
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         analytics_storage: 'denied',
+        wait_for_update: 500,
       });
 
+      gtag('js', new Date());
       gtag('config', ga4Id, { send_page_view: false });
 
+      // Called by CookieBar on accept.
       window.__loadGA4 = function () {
         if (window.__GA4_LOADED__) return;
         window.__GA4_LOADED__ = true;
-
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4Id;
-        document.head.appendChild(s);
-
         gtag('consent', 'update', {
           ad_storage: 'granted',
           ad_user_data: 'granted',
           ad_personalization: 'granted',
           analytics_storage: 'granted',
         });
-
         gtag('event', 'page_view');
       };
 
-      // Returning visitor who already accepted — load immediately.
+      // Returning visitor who already accepted.
       try {
-        if (localStorage.getItem('cookie-consent') === 'accept') {
-          window.__loadGA4();
-        }
+        if (localStorage.getItem('cookie-consent') === 'accept') window.__loadGA4();
       } catch (e) {}
-    })();
-  </script>
+    </script>
+
+    {/* Static script tag — required for Google to detect GA4 */}
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+  </>
 )}
