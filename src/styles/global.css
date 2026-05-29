@@ -565,6 +565,13 @@ body.menu-open {
   color: var(--accent);
   font-size: 13px;
 }
+@media (max-width: 372px) {
+  .badge {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
 
 /* STAT STRIP */
 .stat-strip {
