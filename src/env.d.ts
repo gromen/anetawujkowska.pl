@@ -14,3 +14,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  __updateNavLastY?: (y: number) => void;
+  __loadGA4?: () => void;
+  __GA4_LOADED__?: boolean;
+  gtag?: (...args: unknown[]) => void;
+  dataLayer?: unknown[];
+}

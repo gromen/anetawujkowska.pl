@@ -70,14 +70,14 @@ const { nav, contact } = site;
   </svg>
 </button>
 
-<script is:inline>
+<script>
   (function () {
     const nav = document.querySelector("nav.top");
     if (!nav) return;
     let lastY = 0;
     let ticking = false;
 
-    window.__updateNavLastY = function (y) {
+    window.__updateNavLastY = function (y: number) {
       lastY = y;
     };
 
@@ -105,9 +105,11 @@ const { nav, contact } = site;
 
     /* scroll spy */
     var sectionIds = ["o-mnie", "kredyty", "proces", "kontakt"];
-    var linkMap = {};
+    const linkMap: Record<string, HTMLAnchorElement> = {};
     sectionIds.forEach(function (id) {
-      var link = document.querySelector('.navlinks a[href="/#' + id + '"]');
+      var link = document.querySelector<HTMLAnchorElement>(
+        '.navlinks a[href="/#' + id + '"]',
+      );
       if (link) linkMap[id] = link;
     });
 
@@ -130,50 +132,58 @@ const { nav, contact } = site;
   })();
 </script>
 
-<script is:inline>
+<script>
   (function () {
-    const burger = document.querySelector(".burger");
+    const burger = document.querySelector<HTMLButtonElement>(".burger");
     const menu = document.getElementById("mobile-menu");
+    const closeBtn = document.querySelector<HTMLButtonElement>(".mm-close");
     if (!burger || !menu) return;
-    const closeBtn = document.querySelector(".mm-close");
-    var scrollY = 0;
-    function setOpen(open) {
+
+    let scrollY = 0;
+
+    function setOpen(open: boolean) {
+      if (!burger || !menu) return;
+
       if (open) {
         scrollY = window.scrollY;
         document.body.style.top = "-" + scrollY + "px";
       } else {
         document.body.style.top = "";
         window.scrollTo(0, scrollY);
-        if (window.__updateNavLastY) window.__updateNavLastY(scrollY);
+        window.__updateNavLastY?.(scrollY);
       }
       document.body.classList.toggle("menu-open", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
       menu.setAttribute("aria-hidden", open ? "false" : "true");
-      if (closeBtn)
-        closeBtn.setAttribute("aria-hidden", open ? "false" : "true");
+      closeBtn?.setAttribute("aria-hidden", open ? "false" : "true");
     }
+
     function syncClosePos() {
-      if (!closeBtn) return;
+      if (!burger || !closeBtn) return;
       const r = burger.getBoundingClientRect();
       closeBtn.style.top = r.top + "px";
       closeBtn.style.right = window.innerWidth - r.right + "px";
     }
+
     burger.addEventListener("click", function () {
       syncClosePos();
       setOpen(!document.body.classList.contains("menu-open"));
     });
-    if (closeBtn)
-      closeBtn.addEventListener("click", function () {
-        setOpen(false);
-      });
+
+    closeBtn?.addEventListener("click", function () {
+      setOpen(false);
+    });
+
     menu.querySelectorAll("[data-mm]").forEach(function (a) {
       a.addEventListener("click", function () {
         setOpen(false);
       });
     });
+
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") setOpen(false);
     });
+
     window.addEventListener("resize", function () {
       if (document.body.classList.contains("menu-open")) syncClosePos();
     });

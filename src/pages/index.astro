@@ -1,14 +1,21 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import heroPhoto from "~/assets/aneta-biurko.jpg";
 import aboutPhoto from "~/assets/aneta-laptop.jpg";
 import Layout from "~/layouts/Layout.astro";
 import { site } from "~/lib/site";
 const { contact } = site;
 const tel = `tel:${contact.phone}`;
+const [h480, h720, h960] = await Promise.all([
+  getImage({ src: heroPhoto, width: 480, format: 'webp' }),
+  getImage({ src: heroPhoto, width: 720, format: 'webp' }),
+  getImage({ src: heroPhoto, width: 960, format: 'webp' }),
+]);
+const heroSrcset = `${h480.src} 480w, ${h720.src} 720w, ${h960.src} 960w`;
+const heroSizes = '(max-width: 880px) 100vw, 40vw';
 ---
 
-<Layout>
+<Layout heroPreloadSrcset={heroSrcset} heroPreloadSizes={heroSizes}>
   <header id="top" class="hero">
     <div class="container">
       <div class="label-row">

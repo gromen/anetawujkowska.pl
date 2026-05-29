@@ -11,4 +11,9 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: 'compile',
   }),
+  vite: {
+    server: {
+      allowedHosts: ['.ngrok-free.app', '.ngrok.io'],
+    },
+  },
 });
